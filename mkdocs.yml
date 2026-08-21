@@ -1,0 +1,34 @@
+site_name: "bitr-toolkit"
+site_description: "Documentación del proyecto bitr-toolkit"
+site_author: "Aldo Villagra"
+site_url: https://.github.io/bitr-toolkit/
+repo_url: "https://github.com//bitr-toolkit"
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - toc.integrate
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            docstring_options:
+              ignore_init_summary: true
+            show_source: true
+            show_signature: true
+            separate_signature: true
+            members_order: alphabetical
+
+nav:
+  - Inicio: index.md
+  - Código:
+      - "bitr_toolkit": "reference/bitr_toolkit.md"
+  - Pruebas: tests.md
