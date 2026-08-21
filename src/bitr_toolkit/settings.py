@@ -101,11 +101,14 @@ def load_settings(
     # Carga .env sin obligar a que exista.
     dotenv_path = Path(".env")
     if dotenv_path.exists():
+        load_dotenv(dotenv_path, override=False)
+
+    if not path.exists():
         if not create_if_missing:
             return settings_cls()
 
         if interactive:
-            typer.echo(f"No existe el archivo de configuracion: {path}")
+            typer.echo(f"No existe el archivo de configuración: {path}")
             typer.echo("\nConfiguración por defecto:\n")
             typer.echo(dump_settings(settings_cls()))
 
@@ -115,14 +118,14 @@ def load_settings(
             create_default_config(settings_cls, path)
             typer.echo(f"Configuración creada: {path}")
         else:
-            # En ejecución no inreactiva no se debe bloquear el proceso.
+            # En ejecución no interactiva no se debe bloquear el proceso.
             create_default_config(settings_cls, path)
 
     file_data = load_config_file(path)
 
-    # los valores del archivo se usan como argumentos explícitos.
-    # en pydantic settings, los argumentos explicitos tienen prioridad
-    # sobre los environment variables.
+    # Los valores del archivo se usan como argumentos explícitos.
+    # En Pydantic Settings, los argumentos explícitos tienen prioridad
+    # sobre environment variables.
     return settings_cls(**file_data)
 
 
